@@ -1,6 +1,13 @@
+import Navbar from './components/navbar'
+import Home from './pages/home'
+import Trending from './components/trending'
 const App = () => {
   return (
-    <div className='font-bold'>App</div>
+    <>
+    <Navbar />
+    <Home />
+    <Trending />
+    </>
   )
 }
 
