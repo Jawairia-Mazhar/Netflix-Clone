@@ -10,7 +10,7 @@ const home = () => {
   const [movies, setMovies] = React.useState([]) // State to hold the trending movies data
 
   React.useEffect(() => { // Fetch trending movies data from TMDB API when the component mounts
-    fetch(`https://api.themoviedb.org/3/trending/movie/week?qty=5&api_key=${import.meta.env.VITE_TMDB_API_KEY}`)
+    fetch(`https://api.themoviedb.org/3/trending/movie/week?&api_key=${import.meta.env.VITE_TMDB_API_KEY}`)
     .then(res => res.json())
     .then(data => {
       console.log(data.results)
@@ -34,6 +34,23 @@ const home = () => {
     {question: "What can I watch on Netflix?", answer: "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want."}
   ]
 
+  const scrollMoviesRef = React.useRef(null) // Ref to the scrollable movies container, null implies no element attached yet.
+  const [showLeft, setShowLeft] = React.useState(false) //initially false because the user has not scrolled yet.
+  const [showRight, setShowRight] = React.useState(true)
+
+  const scrollLeft = () => {
+    scrollMoviesRef.current?.scrollBy({ left: -300, behavior: 'smooth' }) // Scroll left by 300 pixels with smooth behavior 
+  }
+  const scrollRight = () => {
+    scrollMoviesRef.current?.scrollBy({ left: 300, behavior: 'smooth' }) // Scroll right by 300 pixels with smooth behavior
+  }
+
+  const handleScroll = () => {
+    const el = scrollMoviesRef.current
+    setShowLeft(el.scrollLeft > 0) // Show left scroll button if the user has scrolled to the right
+    setShowRight(el.scrollLeft + el.clientWidth < el.scrollWidth) // Show right scroll button if the user has not scrolled to the end of the container
+  }
+
   return (
     <>
       <main className='relative h-screen'>
@@ -49,14 +66,28 @@ const home = () => {
 
 {/* Trending*/}
       <section className='px-34 py-4'>
-        <span className='w-full text-xl font-bold'>Trending Now</span>
-        <div className='scroll-menu '>
-          {movies.map(movie => (
-            <div key={movie.id} className='movie-card w-44 h-full flex flex-col items-center justify-center gap-2 rounded-md'>
-              <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title || movie.name} className='w-full h-full object-cover rounded'/>
+        <span className='text-xl font-bold'>Trending Now</span>
+        <div className = "relative">
+    {/* scrollLeft button*/}
+          {showLeft && (
+            <div className="absolute bg-white h-full w-8 left-0 z-10 top-1/2 -translate-y-1/2 flex items-center justify-center p-4">
+            <button onClick={scrollLeft} className='bg-gray-200 p-1 h-30 rounded-md text-xl'>{'<'}</button>
+            </div>)}
+
+          <div ref={scrollMoviesRef} onScroll={handleScroll} className='scroll-menu px-36'>
+            {movies.slice(0, 10).map(movie => (
+              <div key={movie.id} className='movie-card w-44 h-full flex flex-col items-center justify-center gap-2 rounded-md'>
+                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title || movie.name} className='w-full h-full object-cover rounded-xl'/>
+              </div>
+            ))}
+          </div>
+    {/* scrollRight button */}
+          {showRight && (
+            <div className="absolute bg-white h-full w-8 right-0 z-10 top-1/2 -translate-y-1/2 flex items-center justify-center p-4">
+              <button onClick={scrollRight} className='bg-gray-200 p-1 h-30 rounded-md text-xl'>{'>'}</button>
             </div>
-          ))}
-        </div>
+          )}
+          </div>
       </section>
 
 {/* More Reasons to join*/}
