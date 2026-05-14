@@ -4,6 +4,7 @@ import '../App.css'
 import.meta.env.VITE_TMDB_API_KEY
 import ReasonsToJoin from '../components/ReasonsToJoin'
 import FAQItem from '../components/FAQItem'
+import EmailForm from '../components/EmailForm'
 
 const home = () => {
   const [movies, setMovies] = React.useState([]) // State to hold the trending movies data
@@ -41,13 +42,9 @@ const home = () => {
         <div className='absolute inset-0 bg-black/60'></div>
 
         <div className='flex flex-col items-center justify-center text-center gap-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white'>
-          <h1 className='text-6xl bold relative font-[900]'>Unlimited Movies, TV Shows and More</h1>
-          <p className='relative'>Starts at 250. Cancel anytime.</p>
-          <span>Ready to watch? Enter your email to create or restart your membership.</span>
-          <div className='flex flex-row'>
-            <input type="email" placeholder="Enter your email" />
-            <button className='bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700'>Get Started &gt;</button>
-          </div>
+          <h1 className='text-6xl relative font-[900]'>Unlimited movies, TV shows and more</h1>
+          <p className='relative font-semibold text-xl'>Starts at 250. Cancel anytime.</p>
+          <EmailForm size="small" />
         </div>
       </main>
 
@@ -87,6 +84,11 @@ const home = () => {
             />
           ))}
         </div>
+      </div>
+
+      <div className='px-34 py-4 items-center flex justify-center text-center gap-4'>
+        <EmailForm size="large"/>
+    
       </div>
     </>
   )
