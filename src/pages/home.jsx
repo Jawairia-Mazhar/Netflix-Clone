@@ -14,7 +14,7 @@ const home = () => {
     .then(res => res.json())
     .then(data => {
       console.log(data.results)
-      setMovies(data.results)
+      setMovies(data.results.slice(0, 10)) // Update the movies state with the first 10 trending movies
     })
   }, [])
 
@@ -26,7 +26,6 @@ const home = () => {
   ]
 
   const [OpenFAQ, setOpenFAQ] = React.useState(null) // State to track which FAQ item is currently open
-
   const faqItems = [
     {question: "What is Netflix?", answer: "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices."},
     {question: "How much does Netflix cost?", answer: "Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from Rs250 to Rs1100 a month. No extra costs, no contracts."},
