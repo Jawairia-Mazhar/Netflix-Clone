@@ -44,7 +44,6 @@ const home = () => {
   const scrollRight = () => {
     scrollMoviesRef.current?.scrollBy({ left: 300, behavior: 'smooth' }) // Scroll right by 300 pixels with smooth behavior
   }
-
   const handleScroll = () => {
     const el = scrollMoviesRef.current
     setShowLeft(el.scrollLeft > 0) // Show left scroll button if the user has scrolled to the right
@@ -75,8 +74,13 @@ const home = () => {
             </div>)}
 
           <div ref={scrollMoviesRef} onScroll={handleScroll} className='scroll-menu px-36'>
-            {movies.slice(0, 10).map(movie => (
-              <div key={movie.id} className='movie-card w-44 h-full flex flex-col items-center justify-center gap-2 rounded-md'>
+            {movies.slice(0, 10).map((movie, index) => (
+              <div key={movie.id} className='movie-card relative w-46 h-full flex flex-col items-center justify-center rounded-md'>
+
+                <span className='absolute -left-5 bottom-4 text-8xl font-black text-black' 
+                      style={{WebkitTextStroke: '2px white'}}>
+                      {index + 1}
+                </span>                
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title || movie.name} className='w-full h-full object-cover rounded-xl'/>
               </div>
             ))}
