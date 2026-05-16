@@ -95,9 +95,9 @@ const home = () => {
       </section>
 
 {/* More Reasons to join*/}
-      <div className='px-34 py-4'>
-        <h2 className='text-3xl font-bold text-center mb-4'>More Reasons to Join</h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8'>
+      <div className='px-[136px] py-4'>
+        <h2 className='text-2xl font-bold'>More Reasons to Join</h2>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 m-2 mb-8'>
           {reasons.map((reason, index) => (
             <ReasonsToJoin key={index} title={reason.title} description={reason.description} icon={reason.icon} />
           ))}
@@ -105,7 +105,7 @@ const home = () => {
       </div>
 
 {/* Frequently asked questions */}
-      <div className="px-34 py-4">
+      <div className="px-[136px] py-4">
         <h2 className='text-3xl font-bold text-center mb-4'>Frequently Asked Questions</h2>
         <div className='flex flex-col gap-2'>
           {faqItems.map((faq, index) => (
@@ -120,7 +120,7 @@ const home = () => {
         </div>
       </div>
 
-      <div className='px-34 py-4 items-center flex justify-center text-center gap-4'>
+      <div className='px-[136px] py-4 items-center flex justify-center text-center gap-4'>
         <EmailForm size="large"/>
     
       </div>
