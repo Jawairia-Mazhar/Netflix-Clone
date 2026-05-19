@@ -26,8 +26,9 @@ const home = () => {
   ]
 
   const [OpenFAQ, setOpenFAQ] = React.useState(null) // State to track which FAQ item is currently open
+  
   const faqItems = [
-    {question: "What is Netflix?", answer: "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices."},
+    {question: "What is Netflix?", answer: "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.You can watch as much as you want, whenever you want without a single commercial – all for one low monthly price. There's always something new to discover and new TV shows and movies are added every week!"},
     {question: "How much does Netflix cost?", answer: "Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from Rs250 to Rs1100 a month. No extra costs, no contracts."},
     {question: "Where can I watch?", answer: "Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app, including smart TVs, smartphones, tablets, streaming media players and game consoles."},
     {question: "How do I cancel?", answer: "Netflix is flexible. There are no pesky contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime."},
@@ -62,12 +63,10 @@ const home = () => {
           <EmailForm size="small" />
         </div>
       </main>
-
 {/* Trending*/}
-      <section className='px-34 py-4'>
-        <span className='text-xl font-bold'>Trending Now</span>
+      <section className='md:px-[136px] px-8 py-4' id="trending">
+        <span className='text-2xl font-bold'>Trending Now</span>
         <div className = "relative">
-    {/* scrollLeft button*/}
           {showLeft && (
             <div className="absolute bg-white h-full w-8 left-0 z-10 top-1/2 -translate-y-1/2 flex items-center justify-center p-4">
             <button onClick={scrollLeft} className='bg-gray-200 p-1 h-30 rounded-md text-xl'>{'<'}</button>
@@ -85,6 +84,7 @@ const home = () => {
               </div>
             ))}
           </div>
+
     {/* scrollRight button */}
           {showRight && (
             <div className="absolute bg-white h-full w-8 right-0 z-10 top-1/2 -translate-y-1/2 flex items-center justify-center p-4">
@@ -95,9 +95,9 @@ const home = () => {
       </section>
 
 {/* More Reasons to join*/}
-      <div className='px-[136px] py-4'>
+      <div className='px-8 md:px-[136px] py-4'>
         <h2 className='text-2xl font-bold'>More Reasons to Join</h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 m-2 mb-8'>
+        <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4 m-2 mb-8'>
           {reasons.map((reason, index) => (
             <ReasonsToJoin key={index} title={reason.title} description={reason.description} icon={reason.icon} />
           ))}
@@ -105,7 +105,7 @@ const home = () => {
       </div>
 
 {/* Frequently asked questions */}
-      <div className="px-[136px] py-4">
+      <div className="px-8 md:px-[136px] py-4" id="faq">
         <h2 className='text-3xl font-bold text-center mb-4'>Frequently Asked Questions</h2>
         <div className='flex flex-col gap-2'>
           {faqItems.map((faq, index) => (
@@ -120,7 +120,7 @@ const home = () => {
         </div>
       </div>
 
-      <div className='px-[136px] py-4 items-center flex justify-center text-center gap-4'>
+      <div className='px-8 md:px-[136px] py-4 items-center flex justify-center text-center gap-4'>
         <EmailForm size="large"/>
     
       </div>
