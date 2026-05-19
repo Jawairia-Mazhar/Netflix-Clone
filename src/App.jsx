@@ -1,12 +1,13 @@
 import Navbar from './components/navbar'
 import Home from './pages/home'
-import Trending from './components/trending'
+import Footer from './components/Footer'
+
 const App = () => {
   return (
     <>
-    <Navbar />
-    <Home />
-    <Trending />
+      <Navbar />
+      <Home />
+      <Footer />
     </>
   )
 }
