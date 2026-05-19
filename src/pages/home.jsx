@@ -68,20 +68,22 @@ const home = () => {
         <span className='text-2xl font-bold'>Trending Now</span>
         <div className = "relative">
           {showLeft && (
-            <div className="absolute bg-white h-full w-8 left-0 z-10 top-1/2 -translate-y-1/2 flex items-center justify-center p-4">
-            <button onClick={scrollLeft} className='bg-gray-200 p-1 h-30 rounded-md text-xl'>{'<'}</button>
+            <div className="absolute bg-black h-full w-8 left-0 z-10 top-1/2 -translate-y-1/2 flex items-center justify-center p-4">
+            <button onClick={scrollLeft} className='bg-zinc-800 p-1 h-30 rounded-md text-xl'>{'<'}</button>
             </div>)}
 
           <div ref={scrollMoviesRef} onScroll={handleScroll} className='scroll-menu px-36'>
             {movies.slice(0, 10).map((movie, index) => (
-              <div key={movie.id} className='movie-card relative w-46 h-full flex flex-col items-center justify-center rounded-md'>
+              <div key={movie.id}  
+                className='movie-card relative w-[180px] h-[252px] flex flex-col items-center justify-center rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer '
+                onClick={() => openedMovie(movie)}>// Open the modal with the selected movie when the card is clicked 
 
                 <span className='absolute -left-5 bottom-4 text-8xl font-black text-black' 
                       style={{WebkitTextStroke: '2px white'}}>
                       {index + 1}
                 </span>                
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title || movie.name} className='w-full h-full object-cover rounded-xl'/>
-              </div>
+</div>
             ))}
           </div>
 
