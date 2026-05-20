@@ -5,6 +5,7 @@ import.meta.env.VITE_TMDB_API_KEY
 import ReasonsToJoin from '../components/ReasonsToJoin'
 import FAQItem from '../components/FAQItem'
 import EmailForm from '../components/EmailForm'
+import MovieModal from "../components/movieModal"
 
 const home = () => {
   const [movies, setMovies] = React.useState([]) // State to hold the trending movies data
@@ -51,6 +52,12 @@ const home = () => {
     setShowRight(el.scrollLeft + el.clientWidth < el.scrollWidth) // Show right scroll button if the user has not scrolled to the end of the container
   }
 
+  const [selectedMovie, setSelectedMovie] = React.useState(null) // State to track the currently selected movie for the modal
+
+  const openedMovie = (movie) => {
+  setSelectedMovie(movie) // Set the selected movie when a movie card is clicked, which will trigger the modal to open
+  }
+
   return (
     <>
       <main className='relative h-screen'>
@@ -67,7 +74,9 @@ const home = () => {
       <section className='md:px-[136px] px-8 py-4' id="trending">
         <span className='text-2xl font-bold'>Trending Now</span>
         <div className = "relative">
+{/* scrollLeft button*/}
           {showLeft && (
+{/* scrollLeft button*/}
             <div className="absolute bg-black h-full w-8 left-0 z-10 top-1/2 -translate-y-1/2 flex items-center justify-center p-4">
             <button onClick={scrollLeft} className='bg-zinc-800 p-1 h-30 rounded-md text-xl'>{'<'}</button>
             </div>)}
@@ -76,11 +85,11 @@ const home = () => {
             {movies.slice(0, 10).map((movie, index) => (
               <div key={movie.id}  
                 className='movie-card relative w-[180px] h-[252px] flex flex-col items-center justify-center rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer '
-                onClick={() => openedMovie(movie)}>// Open the modal with the selected movie when the card is clicked 
+          </div>
 
                 <span className='absolute -left-5 bottom-4 text-8xl font-black text-black' 
                       style={{WebkitTextStroke: '2px white'}}>
-                      {index + 1}
+          </div>
                 </span>                
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title || movie.name} className='w-full h-full object-cover rounded-xl'/>
 </div>
@@ -89,6 +98,17 @@ const home = () => {
 
     {/* scrollRight button */}
           {showRight && (
+      {selectedMovie && (
+      <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
+    )}
+
+    {movies.map(movie => (
+      <div
+        key={movie.id}
+        onClick={() => openedMovie(movie)}
+      >
+      </div>))}
+
             <div className="absolute bg-white h-full w-8 right-0 z-10 top-1/2 -translate-y-1/2 flex items-center justify-center p-4">
               <button onClick={scrollRight} className='bg-gray-200 p-1 h-30 rounded-md text-xl'>{'>'}</button>
             </div>
